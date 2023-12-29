@@ -3,8 +3,6 @@ package belajar_golang_database
 import (
 	"database/sql"
 	"testing"
-
-	_ "github.com/go-sql-driver/mysql"
 )
 
 func TestOpenConnection(t *testing.T) {
