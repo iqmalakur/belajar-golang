@@ -55,12 +55,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "type": "object",
-                "properties": {
-                  "name": {
-                    "type": "string"
-                  }
-                }
+                "$ref": "#/components/schemas/CategoryReqBody"
               }
             }
           }
@@ -125,11 +120,63 @@
             }
           }
         }
+      },
+      "put": {
+        "description": "Update Category by id",
+        "summary": "Update Category by id",
+        "tags": [
+          "Category API"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Category Id",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CategoryReqBody"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success update Category",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
       }
     }
   },
   "components": {
     "schemas": {
+      "CategoryReqBody": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          }
+        }
+      },
       "Category": {
         "type": "object",
         "properties": {
