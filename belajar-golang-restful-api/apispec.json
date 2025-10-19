@@ -111,8 +111,14 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "name": {
+                    "code": {
+                      "type": "number"
+                    },
+                    "status": {
                       "type": "string"
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/Category"
                     }
                   }
                 }
@@ -155,7 +161,51 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "name": {
+                    "code": {
+                      "type": "number"
+                    },
+                    "status": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/Category"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "description": "Delete Category by id",
+        "summary": "Delete Category by id",
+        "tags": [
+          "Category API"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Category Id",
+            "schema": {
+              "type": "number"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success delete Category",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "number"
+                    },
+                    "status": {
                       "type": "string"
                     }
                   }
