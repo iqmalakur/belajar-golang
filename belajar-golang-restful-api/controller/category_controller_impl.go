@@ -11,14 +11,18 @@ import (
 )
 
 type CategoryControllerImpl struct {
-	service service.CategoryService
+	Service service.CategoryService
+}
+
+func NewCategoryController(service service.CategoryService) CategoryController {
+	return &CategoryControllerImpl{Service: service}
 }
 
 func (controller *CategoryControllerImpl) Create(writer http.ResponseWriter, request *http.Request, params httprouter.Params) {
 	categoryCreateRequest := web.CategoryCreateRequest{}
 	helper.ReadFromRequestBody(request, &categoryCreateRequest)
 
-	categoryResponse := controller.service.Create(request.Context(), categoryCreateRequest)
+	categoryResponse := controller.Service.Create(request.Context(), categoryCreateRequest)
 	webResponse := web.NewWebResponse(http.StatusOK, categoryResponse)
 
 	helper.WriteToResponseBody(writer, webResponse)
@@ -34,7 +38,7 @@ func (controller *CategoryControllerImpl) Update(writer http.ResponseWriter, req
 
 	categoryUpdateRequest.Id = id
 
-	categoryResponse := controller.service.Update(request.Context(), categoryUpdateRequest)
+	categoryResponse := controller.Service.Update(request.Context(), categoryUpdateRequest)
 	webResponse := web.NewWebResponse(http.StatusOK, categoryResponse)
 
 	helper.WriteToResponseBody(writer, webResponse)
@@ -45,7 +49,7 @@ func (controller *CategoryControllerImpl) Delete(writer http.ResponseWriter, req
 	id, err := strconv.Atoi(idParam)
 	helper.PanicIfError(err)
 
-	controller.service.Delete(request.Context(), id)
+	controller.Service.Delete(request.Context(), id)
 	webResponse := web.NewWebResponse(http.StatusOK, nil)
 
 	helper.WriteToResponseBody(writer, webResponse)
@@ -56,14 +60,14 @@ func (controller *CategoryControllerImpl) FindById(writer http.ResponseWriter, r
 	id, err := strconv.Atoi(paramId)
 	helper.PanicIfError(err)
 
-	categoryResponse := controller.service.FindById(request.Context(), id)
+	categoryResponse := controller.Service.FindById(request.Context(), id)
 	webResponse := web.NewWebResponse(http.StatusOK, categoryResponse)
 
 	helper.WriteToResponseBody(writer, webResponse)
 }
 
 func (controller *CategoryControllerImpl) FindAll(writer http.ResponseWriter, request *http.Request, params httprouter.Params) {
-	categoryResponses := controller.service.FindAll(request.Context())
+	categoryResponses := controller.Service.FindAll(request.Context())
 	webResponse := web.NewWebResponse(http.StatusOK, categoryResponses)
 
 	helper.WriteToResponseBody(writer, webResponse)

@@ -14,7 +14,15 @@ import (
 type CategoryServiceImpl struct {
 	Repository repository.CategoryRepository
 	DB         *sql.DB
-	Validate   validator.Validate
+	Validate   *validator.Validate
+}
+
+func NewCategoryService(repository repository.CategoryRepository, db *sql.DB, validate *validator.Validate) CategoryService {
+	return &CategoryServiceImpl{
+		Repository: repository,
+		DB:         db,
+		Validate:   validate,
+	}
 }
 
 func (service *CategoryServiceImpl) Create(ctx context.Context, request web.CategoryCreateRequest) web.CategoryResponse {
