@@ -3,9 +3,9 @@ package web
 import "net/http"
 
 type WebResponse struct {
-	Code   int
-	Status string
-	Data   any
+	Code   int    `json:"code"`
+	Status string `json:"status"`
+	Data   any    `json:"data"`
 }
 
 func NewWebResponse(code int, data any) WebResponse {
