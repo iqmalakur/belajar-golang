@@ -1,33 +1,22 @@
 package main
 
 import (
-	"iqmalakur/belajar-golang-dependency-injection/app"
-	"iqmalakur/belajar-golang-dependency-injection/controller"
 	"iqmalakur/belajar-golang-dependency-injection/helper"
 	"iqmalakur/belajar-golang-dependency-injection/middleware"
-	"iqmalakur/belajar-golang-dependency-injection/repository"
-	"iqmalakur/belajar-golang-dependency-injection/service"
 	"net/http"
 
-	"github.com/go-playground/validator/v10"
 	_ "github.com/go-sql-driver/mysql"
 )
 
-func main() {
-	db := app.NewDB()
-	validate := validator.New()
-
-	categoryRepository := repository.NewCategoryRepository()
-	categoryService := service.NewCategoryService(categoryRepository, db, validate)
-	categoryController := controller.NewCategoryController(categoryService)
-
-	router := app.NewRouter(categoryController)
-
-	server := http.Server{
+func NewServer(authMiddleware *middleware.AuthMiddleware) *http.Server {
+	return &http.Server{
 		Addr:    "localhost:3000",
-		Handler: middleware.NewAuthMiddleware(router),
+		Handler: authMiddleware,
 	}
+}
 
+func main() {
+	server := InitializedServer()
 	err := server.ListenAndServe()
 	helper.PanicIfError(err)
 }
