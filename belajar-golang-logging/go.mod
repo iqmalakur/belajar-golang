@@ -1,4 +1,4 @@
-module belajar-golang-logging
+module belajar_golang_logging
 
 go 1.25.1
 
