@@ -6,3 +6,6 @@ migrate create -ext sql -dir db/migrations create_table_category
 
 # Migration up
 migrate -database "mysql://root:root@tcp(localhost:3306)/belajar_golang_database_migration" -path db/migrations up
+
+# Migration down
+migrate -database "mysql://root:root@tcp(localhost:3306)/belajar_golang_database_migration" -path db/migrations down
