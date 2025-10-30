@@ -26,3 +26,14 @@ migrate -database "mysql://root:root@tcp(localhost:3306)/belajar_golang_database
 
 # Migration down specific versions
 migrate -database "mysql://root:root@tcp(localhost:3306)/belajar_golang_database_migration" -path db/migrations down 1
+
+# Dirty state
+migrate create -ext sql -dir db/migrations sample_dirty_state
+migrate -database "mysql://root:root@tcp(localhost:3306)/belajar_golang_database_migration" -path db/migrations up
+migrate -database "mysql://root:root@tcp(localhost:3306)/belajar_golang_database_migration" -path db/migrations down 1 # error dirty state
+
+# Force update version
+migrate -database "mysql://root:root@tcp(localhost:3306)/belajar_golang_database_migration" -path db/migrations force 20251030093931
+
+# Check current version
+migrate -database "mysql://root:root@tcp(localhost:3306)/belajar_golang_database_migration" -path db/migrations version
