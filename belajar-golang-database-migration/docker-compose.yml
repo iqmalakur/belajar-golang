@@ -10,7 +10,7 @@ services:
       - MYSQL_ROOT_PASSWORD=
       - MYSQL_DATABASE=belajar_golang_database_migration
     volumes:
-      - golang-restful-api-data:/var/lib/mysql
+      - golang-database-migration-data:/var/lib/mysql
 
 volumes:
-  golang-restful-api-data:
+  golang-database-migration-data:
