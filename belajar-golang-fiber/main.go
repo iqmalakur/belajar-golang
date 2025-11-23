@@ -15,6 +15,9 @@ func main() {
 		Prefork:      true,
 	})
 
+	// middleware
+	// bisa juga menggunakan default middleware dari fiber
+	// https://docs.gofiber.io/category/-middleware/
 	// app.Use(func(ctx *fiber.Ctx) error {
 	// 	fmt.Println("I'm middleware before processing request")
 	// 	err := ctx.Next()
