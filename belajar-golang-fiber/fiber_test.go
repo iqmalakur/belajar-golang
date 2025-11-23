@@ -57,3 +57,24 @@ func TestCtx(t *testing.T) {
 	assert.Nil(t, err)
 	assert.Equal(t, "Hello Guest", string(bytes))
 }
+
+func TestHttpRequest(t *testing.T) {
+	app.Get("/request", func(ctx *fiber.Ctx) error {
+		first := ctx.Get("firstname")
+		last := ctx.Cookies("lastname")
+		return ctx.SendString("Hello " + first + " " + last)
+	})
+
+	request := httptest.NewRequest(http.MethodGet, "/request", nil)
+	request.Header.Set("firstname", "Ucup")
+	request.AddCookie(&http.Cookie{Name: "lastname", Value: "Surucup"})
+	response, err := app.Test(request)
+
+	assert.Nil(t, err)
+	assert.Equal(t, 200, response.StatusCode)
+
+	bytes, err := io.ReadAll(response.Body)
+
+	assert.Nil(t, err)
+	assert.Equal(t, "Hello Ucup Surucup", string(bytes))
+}
