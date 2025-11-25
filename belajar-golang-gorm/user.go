@@ -26,3 +26,11 @@ type Name struct {
 	MiddleName string `gorm:"column:middle_name"`
 	LastName   string `gorm:"column:last_name"`
 }
+
+type UserLog struct {
+	ID        string `gorm:"autoIncrement"`
+	UserId    string
+	Action    string
+	CreatedAt time.Time
+	UpdatedAt time.Time
+}
