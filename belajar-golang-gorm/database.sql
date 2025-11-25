@@ -15,3 +15,12 @@ CREATE TABLE users
   updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
   PRIMARY KEY (id)
 ) ENGINE = InnoDB;
+
+ALTER TABLE users
+  RENAME COLUMN name TO first_name;
+
+ALTER TABLE users
+  ADD COLUMN middle_name VARCHAR(100) NULL AFTER first_name;
+
+ALTER TABLE users
+  ADD COLUMN last_name VARCHAR(100) NULL AFTER middle_name;
