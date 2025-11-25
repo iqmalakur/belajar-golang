@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"strconv"
 	"testing"
 
@@ -306,4 +307,18 @@ func TestOrderLimitOffset(t *testing.T) {
 	err := db.Order("id asc, first_name asc").Limit(5).Offset(5).Find(&users).Error
 	assert.Nil(t, err)
 	assert.Equal(t, 5, len(users))
+}
+
+type UserResponse struct {
+	ID        string
+	FirstName string
+	LastName  string
+}
+
+func TestQueryNonModel(t *testing.T) {
+	var users []UserResponse
+	err := db.Model(&User{}).Select("id", "first_name", "last_name").Find(&users).Error
+	assert.Nil(t, err)
+	assert.Equal(t, 14, len(users))
+	fmt.Println(users)
 }
