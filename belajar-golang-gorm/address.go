@@ -8,4 +8,5 @@ type Address struct {
 	Address   string
 	CreatedAt time.Time
 	UpdatedAt time.Time
+	User      User `gorm:"foreignKey:user_id;references:id"`
 }
