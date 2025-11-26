@@ -36,3 +36,13 @@ CREATE TABLE user_logs
 ) ENGINE = InnoDB;
 
 SELECT * FROM user_logs;
+
+DELETE FROM user_logs;
+
+ALTER TABLE user_logs
+  MODIFY created_at BIGINT NOT NULL;
+
+ALTER TABLE user_logs
+  MODIFY updated_at BIGINT NOT NULL;
+
+DESC user_logs;
