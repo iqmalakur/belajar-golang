@@ -90,3 +90,30 @@ CREATE TABLE addresses
 DESC addresses;
 
 SELECT * FROM addresses;
+
+CREATE TABLE products
+(
+  id VARCHAR(100) NOT NULL,
+  name VARCHAR(100) NOT NULL,
+  price BIGINT NOT NULL,
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (id)
+) ENGINE = InnoDB;
+
+DESC products;
+
+SELECT * FROM products;
+
+CREATE TABLE user_like_product
+(
+  user_id VARCHAR(100) NOT NULL,
+  product_id VARCHAR(100) NOT NULL,
+  PRIMARY KEY (user_id, product_id),
+  FOREIGN KEY (user_id) REFERENCES users(id),
+  FOREIGN KEY (product_id) REFERENCES products(id)
+) ENGINE = InnoDB;
+
+DESC user_like_product;
+
+SELECT * FROM user_like_product;
